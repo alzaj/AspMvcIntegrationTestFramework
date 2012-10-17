@@ -14,6 +14,7 @@ namespace MvcIntegrationTestFramework.Browsing
         private readonly string httpVerbName;
         private readonly NameValueCollection formValues;
         private readonly NameValueCollection headers;
+        private readonly string clientIPAddress;
 
         public SimulatedWorkerRequest(string page, string query, TextWriter output, HttpCookieCollection cookies, string httpVerbName, NameValueCollection formValues, NameValueCollection headers)
             : base(page, query, output)
@@ -22,6 +23,16 @@ namespace MvcIntegrationTestFramework.Browsing
             this.httpVerbName = httpVerbName;
             this.formValues = formValues;
             this.headers = headers;
+        }
+
+        public SimulatedWorkerRequest(WorkerRequestSettings rqstSettings, TextWriter outputStream)
+            : base(rqstSettings.Url, rqstSettings.queryString, outputStream)
+        {
+            this.cookies = rqstSettings.cookies;
+            this.httpVerbName = rqstSettings.httpMethodName;
+            this.formValues = rqstSettings.formValues;
+            this.headers = rqstSettings.headers;
+            this.clientIPAddress = rqstSettings.clientIpAddress;
         }
 
         public override string GetHttpVerbName()
@@ -55,7 +66,7 @@ namespace MvcIntegrationTestFramework.Browsing
 
         public override string GetRemoteAddress()
         {
-            return "192.168.1.121";
+            return clientIPAddress;
         }
 
         public override string[][] GetUnknownRequestHeaders()

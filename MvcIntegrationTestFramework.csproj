@@ -76,6 +76,7 @@
   <ItemGroup>
     <Compile Include="Browsing\MvcUtils.cs" />
     <Compile Include="Browsing\SimulatedWorkerRequest.cs" />
+    <Compile Include="Browsing\WorkerRequestSettings.cs" />
     <Compile Include="Hosting\AppDomainProxy.cs" />
     <Compile Include="Interception\InterceptionFilterProvider.cs" />
     <Compile Include="Hosting\SerializableDelegate.cs" />
